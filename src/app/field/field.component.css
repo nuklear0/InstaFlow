@@ -1,5 +1,5 @@
 mat-card{
-  max-width: 60%;
+  max-width: 90%;
   margin: auto;
 }
 
@@ -11,4 +11,21 @@ textarea{
 button{
   margin: auto;
   margin-left: 10px;
+}
+
+.parent {
+  width: 500px;
+  margin: auto;
+}
+
+#preview {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#driveInput {
+  height: 14px;
+  max-width: 250px;
+  margin: auto;
 }

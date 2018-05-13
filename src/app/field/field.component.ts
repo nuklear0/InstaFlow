@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-field',
@@ -9,6 +10,8 @@ import {MatSnackBar} from '@angular/material';
 export class FieldComponent implements OnInit {
 
   area: String;
+  url: string;
+  result;
 
   constructor(public snackBar: MatSnackBar) {
   }
@@ -39,5 +42,15 @@ export class FieldComponent implements OnInit {
       duration: 2000,
     });
   }
+
+  readUrl() {
+    this.result = 'https://drive.google.com/uc?export=view&id=';
+    console.log(this.url);
+    this.result += this.url.substring(this.url.lastIndexOf('d/') + 2, this.url.lastIndexOf('/'));
+    console.log(this.result);
+    }
+
+
+
 
 }
