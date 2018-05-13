@@ -1,0 +1,14 @@
+mat-card{
+  max-width: 60%;
+  margin: auto;
+}
+
+textarea{
+  resize: none;
+  overflow: scroll;
+}
+
+button{
+  margin: auto;
+  margin-left: 10px;
+}

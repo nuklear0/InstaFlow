@@ -1,0 +1,12 @@
+<mat-card fxLayout="row">
+  <textarea rows="10" cols="50">
+  {{area}}
+  </textarea>
+  <div fxLayout="column">
+    <button mat-button (click)="generateVertical()">Generate vertical template</button>
+    <button mat-button (click)="generateDefault()">Generate default template</button>
+    <button mat-button (click)="success()" ngxClipboard  [cbContent]="area">Copy</button>
+  </div>
+</mat-card>
+
+
