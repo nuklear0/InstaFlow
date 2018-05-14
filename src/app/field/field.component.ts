@@ -9,15 +9,17 @@ import {forEach} from '@angular/router/src/utils/collection';
 })
 export class FieldComponent implements OnInit {
 
-  area: String;
+  area: string;
   url: string;
   result;
+  hashtag: number;
 
   constructor(public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
     this.area = '';
+    this.hashtag = 0;
   }
 
   generateVertical() {
@@ -37,6 +39,11 @@ export class FieldComponent implements OnInit {
   'The following might interest Instagram\'s algorithm more than you  ';
   }
 
+  updateDescription(area) {
+    this.area = area;
+    this.hashtag = (this.area.match(/#/g) || []).length;
+  }
+
   success() {
     this.snackBar.open('Message copied', null, {
       duration: 2000,
@@ -45,9 +52,12 @@ export class FieldComponent implements OnInit {
 
   readUrl() {
     this.result = 'https://drive.google.com/uc?export=view&id=';
-    console.log(this.url);
-    this.result += this.url.substring(this.url.lastIndexOf('d/') + 2, this.url.lastIndexOf('/'));
-    console.log(this.result);
+    // https://drive.google.com/open?id=182hQwxJGwQjISUS_nTtEsEGyyUsw6Xwt
+    if (this.url.includes('https://drive.google.com/open?id=')) {
+      this.result += this.url.substring(this.url.lastIndexOf('=') + 1, this.url.length);
+    } else {
+      this.result += this.url.substring(this.url.lastIndexOf('d/') + 2, this.url.lastIndexOf('/'));
+    }
     }
 
 

@@ -4,9 +4,12 @@
     <button mat-button (click)="generateDefault()">Generate default template</button>
     <button mat-button (click)="success()" ngxClipboard [cbContent]="area">Copy</button>
   </div>
-  <textarea rows="10" cols="50">
+  <div>
+  <textarea [(ngModel)]="area" rows="10" cols="50" (change)="updateDescription(area)">
   {{area}}
   </textarea>
+  <p>The description contains {{hashtag}} hashtags</p>
+  </div>
   <input id="driveInput" [(ngModel)]="url" type="text" (change)="readUrl()">
   <div class="parent">
     <img id="preview" [src]="result">
