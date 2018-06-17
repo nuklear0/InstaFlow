@@ -1,3 +1,4 @@
+///<reference path="../../../node_modules/@types/node/index.d.ts"/>
 import {Component, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material';
 import {forEach} from '@angular/router/src/utils/collection';
@@ -13,8 +14,14 @@ export class FieldComponent implements OnInit {
   url: string;
   result;
   hashtag: number;
+  Clarifai;
+  app;
 
   constructor(public snackBar: MatSnackBar) {
+    this.Clarifai = require('clarifai');
+    this.app = new this.Clarifai.App({
+      apiKey: ''
+    });
   }
 
   ngOnInit() {
@@ -59,6 +66,23 @@ export class FieldComponent implements OnInit {
       this.result += this.url.substring(this.url.lastIndexOf('d/') + 2, this.url.lastIndexOf('/'));
     }
     }
+
+   predict() {
+     let generated = '';
+     const promise = new Promise((resolve, reject) => {
+       this.app.models.predict(this.Clarifai.GENERAL_MODEL, this.result).then(
+         response => {
+           console.log(response);
+           // console.log(response.rawData.outputs['0'].data.concepts[''+i+''].name)
+           for (let i = 0; i < response.rawData.outputs['0'].data.concepts.length; i++) {
+             generated += ' #' + response.rawData.outputs['0'].data.concepts['' + i + ''].name;
+           }
+           resolve(generated);
+         }
+       );
+     });
+     promise.then(value => this.area += value);
+   }
 
 
 
