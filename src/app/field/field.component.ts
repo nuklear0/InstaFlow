@@ -11,6 +11,7 @@ import {forEach} from '@angular/router/src/utils/collection';
 export class FieldComponent implements OnInit {
 
   area: string;
+  flickrArea: string;
   url: string;
   result;
   hashtag: number;
@@ -67,7 +68,8 @@ export class FieldComponent implements OnInit {
     }
     }
 
-   predict() {
+    // 0 - instagram, 1 - flickr
+   predict(mode) {
      let generated = '';
      const promise = new Promise((resolve, reject) => {
        this.app.models.predict(this.Clarifai.GENERAL_MODEL, this.result).then(
@@ -75,13 +77,21 @@ export class FieldComponent implements OnInit {
            console.log(response);
            // console.log(response.rawData.outputs['0'].data.concepts[''+i+''].name)
            for (let i = 0; i < response.rawData.outputs['0'].data.concepts.length; i++) {
-             generated += ' #' + response.rawData.outputs['0'].data.concepts['' + i + ''].name;
+             if (mode === 0) {
+               generated += ' #' + response.rawData.outputs['0'].data.concepts['' + i + ''].name;
+             } else {
+               generated += response.rawData.outputs['0'].data.concepts['' + i + ''].name + ', ';
+             }
            }
            resolve(generated);
          }
        );
      });
-     promise.then(value => this.area += value);
+     if (mode === 0) {
+       promise.then(value => this.area += value);
+     } else {
+       promise.then(value => this.flickrArea += value);
+     }
    }
 
 

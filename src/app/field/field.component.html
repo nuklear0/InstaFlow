@@ -4,17 +4,25 @@
     <button mat-button (click)="generateDefault()">Generate default template</button>
     <button mat-button (click)="success()" ngxClipboard [cbContent]="area">Copy</button>
   </div>
-  <div>
-  <textarea [(ngModel)]="area" rows="10" cols="50" (change)="updateDescription(area)">
-  {{area}}
-  </textarea>
-  <p>The description contains {{hashtag}} hashtags</p>
+  <div fxLayout="column">
+    <textarea [(ngModel)]="area" rows="10" cols="50" (change)="updateDescription(area)">
+    {{area}}
+    </textarea>
+    <p>The description contains {{hashtag}} hashtags</p>
+    <textarea [(ngModel)]="flickrArea" rows="5" cols="50">
+    {{flickrArea}}
+    </textarea>
   </div>
-  <input id="driveInput" [(ngModel)]="url" type="text" (change)="readUrl()">
-  <div class="parent">
+  <div fxLayout="column">
+    <input id="driveInput" [(ngModel)]="url" type="text" (change)="readUrl()">
+  </div>
+  <div class="parent" fxLayout="column">
     <img id="preview" [src]="result">
   </div>
-  <button mat-button (click)="predict(this.url)">Generate hashtags</button>
+  <div fxLayout="column">
+    <button mat-button (click)="predict(0)">Generate hashtags</button>
+    <button mat-button (click)="predict(1)">Generate flickr description</button>
+  </div>
 </mat-card>
 
 
