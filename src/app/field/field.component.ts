@@ -22,7 +22,7 @@ export class FieldComponent implements OnInit {
   constructor(public snackBar: MatSnackBar) {
     this.Clarifai = require('clarifai');
     this.app = new this.Clarifai.App({
-      apiKey: clarifaiKey
+      apiKey: clarifaiKey.clarifaiKey
     });
   }
 
