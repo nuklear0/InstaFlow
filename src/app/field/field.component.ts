@@ -2,6 +2,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material';
 import {forEach} from '@angular/router/src/utils/collection';
+import {clarifaiKey} from '../../environments/environment';
 
 @Component({
   selector: 'app-field',
@@ -21,7 +22,7 @@ export class FieldComponent implements OnInit {
   constructor(public snackBar: MatSnackBar) {
     this.Clarifai = require('clarifai');
     this.app = new this.Clarifai.App({
-      apiKey: ''
+      apiKey: clarifaiKey
     });
   }
 
